@@ -1,4 +1,9 @@
 node_modules
 server/config.js
+server/credentials.js
+server/token.json
 src/config.js
+src/token.json
+src/credentials.json
 notes.txt
+token.json

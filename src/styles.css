@@ -1,0 +1,134 @@
+body {
+  background-color: rgb(224, 224, 224);
+}
+table {
+  table-layout: fixed;
+}
+iframe {
+  margin-bottom: 15px;
+}
+.about-us {
+  margin-top: 25px;
+}
+.about-us .location-block h4 {
+  margin-bottom: -20px;
+}
+.about-us .location-block p {
+  margin-bottom: -20px;
+}
+.about-us .location-block a {
+  color: inherit;
+}
+.article {
+  --articleMargin: 25px;
+  margin-top: var(--articleMargin);
+  margin-bottom: var(--articleMargin);
+}
+.divider hr {
+  border-color: rgb(54, 54, 54);
+}
+.header {
+  top: 0%;
+  position: sticky;
+  z-index: 999;
+  box-shadow: 5px 2px 7.5px 10px rgba(0, 0, 0, 0.25);
+}
+.header img {
+  width: 50px;
+}
+.home {
+}
+.card-table {
+  margin-top: 50px;
+}
+.card {
+  cursor: pointer;
+  margin: 5px;
+}
+.card p {
+  height: 50px;
+}
+.media-player {
+}
+.media-player h1 {
+  font-size: 25px;
+  margin-bottom: -0px;
+}
+.media-player h2 {
+  font-size: 15px;
+  margin: 0px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+.media-player h3 {
+  font-size: 12px;
+  float: right;
+}
+.media-player audio {
+  width: 50%;
+  border: 2px solid rgba(42, 42, 42, 0.5);
+  border-radius: 30px;
+  padding: 2px;
+}
+.personel-card-table {
+  text-align: center;
+  margin-top: -50px;
+}
+.personel {
+  position: relative;
+  background: rgb(42, 42, 42);
+  text-align: center;
+  margin: 0px;
+  display: inline-block;
+}
+.personel .text-block {
+  text-align: left;
+  height: 325px;
+}
+.personel .text-block .sub-text {
+  font-size: 14px;
+  font-style: italic;
+}
+.personel .contact {
+  text-align: left;
+}
+.personel .contact p {
+  --veritcalMargin: -10px;
+  margin-top: var(--verticalMargin);
+  margin-bottom: var(--verticalMargin);
+}
+.personel-outline {
+  top: 0%;
+  left: 0%;
+  position: absolute;
+  border-radius: 0%;
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgba(0, 0, 0, 0);
+  transition: all 0.5s;
+}
+.personel-outline:hover {
+  border-color: rgb(135, 135, 135);
+  transform: translate(10px, 10px);
+}
+.personel .img img {
+  --width: 175px;
+  min-width: var(--width);
+  width: var(--width);
+  border-radius: 50%;
+  border: 3px solid rgb(135, 135, 135);
+  padding: 2px;
+}
+.personel .img .alt {
+  --width: 162.5px;
+  min-width: var(--width);
+  width: var(--width);
+  min-height: var(--width);
+  height: var(--width);
+  border-radius: 50%;
+  border: 3px solid rgb(135, 135, 135);
+  padding: 2px;
+}
+.sermons {
+  margin-top: 25px;
+}

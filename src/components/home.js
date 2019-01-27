@@ -1,49 +1,99 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import Fade from "react-reveal/Fade";
 import Header from "./header";
 import Footer from "./footer";
+import PersonelCardTable from "./personel_card_table";
+import Article from "./article";
+import Divider from "./divider";
+import CardTable from "./card_table";
+import config from "../config";
+import people from "../people";
+
+import Img from "../img/msla.png";
 
 class Home extends Component {
   render() {
     return (
-      <div>
+      <div className={"home"}>
         <Header />
-        <div
-          className={
-            "uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
-          }
-          data-src={"./img/family_stock_photo.jpg"}
-          uk-img
-        >
-          <h1>Background Image</h1>
-        </div>
-        <div class="uk-section uk-section-muted">
-          <div class="uk-container">
-            <h3>Section</h3>
-
-            <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
-              <div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor.
-                </p>
-              </div>
-              <div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor.
-                </p>
-              </div>
-              <div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor.
-                </p>
+        <Fade delay={config.fadeDelay} duration={config.fadeDuration}>
+          <div className={"uk-section-default"}>
+            <div
+              className={"uk-section uk-light uk-background-cover"}
+              style={{
+                backgroundImage: `url(${Img})`,
+                textAlign: "center",
+                backgroundAttachment: "fixed"
+              }}
+            >
+              <div className={"uk-animation-toggle"} tabindex={"0"}>
+                <h1>Some really cool text goes here</h1>
+                <h2>Some more really cool text goes here</h2>
+                <button
+                  className={"uk-button uk-button-primary uk-button-large"}
+                >
+                  Some text
+                </button>
               </div>
             </div>
           </div>
-        </div>
+        </Fade>
+        <Fade delay={config.fadeDelay} duration={config.fadeDuration}>
+          <div className={"uk-section uk-section-muted"}>
+            <div className={"uk-container"}>
+              <h2 style={{ fontStyle: "italic" }}>
+                “Go therefore and make disciples of all the nations, baptizing
+                them in the name of the Father and the Son and the Holy Spirit,
+                teaching them to observe all that I commanded you; and lo, I am
+                with you always, even to the end of the age.”
+              </h2>
+              <h4>Matthew 28: 19, 20</h4>
+            </div>
+          </div>
+        </Fade>
+        <CardTable
+          perRow={3}
+          elements={[
+            {
+              title: "Audio Resources",
+              text: "Sunday Sermons and Bible Studies",
+              cb: () => (window.location = "/sermons")
+            },
+            {
+              title: "Congregation",
+              text: "Meet the team of Christ's Church Missoula",
+              cb: () => (window.location = "/congregation")
+            },
+            {
+              title: "About Us",
+              text: "Learn more about Christ's Church Missoula",
+              cb: () => (window.location = "/about_us")
+            },
+            {
+              title: "Location",
+              text: "Find us on Google Maps",
+              cb: () => (window.location = "/about_us?loc=true")
+            },
+            {
+              title: "Card Title",
+              text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+              cb: () => console.log("clicked")
+            },
+            {
+              title: "Card Title",
+              text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+              cb: () => console.log("clicked")
+            }
+          ]}
+        />
+        <Fade delay={config.fadeDelay} duration={config.fadeDuration}>
+          <Divider />
+          <Article
+            t1={`Welcome to Christ's Church Missoula`}
+            t2={`Thank you for visiting our site! This is a place to gain important spiritual information and training and to help equip the saints to continue on in the upward call in Christ Jesus. We invite you to see and hear various preaching and training materials. We will be posting this media on a constant basis. Join in on the discussions and lively debates if you like! We are always available for Bible studies. Contact us if you have any questions. We love to dig into the word and to see what it has to say. Truth seekers are always welcome! Please feel free to read more about us. Thanks! From all the Missoula saints.`}
+          />
+        </Fade>
         <Footer />
       </div>
     );

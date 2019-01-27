@@ -1,38 +1,34 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import NavLinks from "./nav_links";
+import config from "../config";
 
-import Img from "../img/placeholder_logo.svg";
+import Img from "../img/cross.svg";
 
 class Header extends Component {
+  componentDidMount() {
+    if (config.autoScrollToTop && !this.props.ignoreScroll) {
+      window.scrollTo(0, 0);
+    }
+  }
+
   render() {
     return (
-      <nav className={"uk-navbar-container"} uk-navbar>
-        <div className={"uk-navbar-right"}>
-          <ul className={"uk-navbar-nav"}>
-            <li>
-              <div>
-                <img src={Img} width={"75px"} uk-svg />
-                <span className={"uk-text-middle"}>
-                  Christ's Church in the Clarkfork
-                </span>
+      <div className={"header"} onScroll={() => console.log("yolo")}>
+        <nav className={"uk-navbar-container"} ukNavbar>
+          <div className={"uk-padding-small"}>
+            <div className={"nav-bar"}>
+              <div class="uk-position-center-right">
+                <NavLinks />
               </div>
-            </li>
-            <li>
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li>
-              <Link to={"/"}>Link1</Link>
-            </li>
-            <li>
-              <Link to={"/"}>Link2</Link>
-            </li>
-            <li>
-              <Link to={"/"}>Link3</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+            </div>
+            <div>
+              <img src={Img} ukSvg />
+              <span className={"uk-text-middle"}>{document.title}</span>
+            </div>
+          </div>
+        </nav>
+      </div>
     );
   }
 }
