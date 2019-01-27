@@ -13,6 +13,7 @@ export default class PersonelCardTable extends Component {
       row.push(
         <td style={{ verticalAlign: "top" }}>
           <PersonelCard
+            imageless={this.props.imageless}
             img={el.img}
             title={el.title}
             name={el.firstName + " " + el.lastName}

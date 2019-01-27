@@ -13,13 +13,15 @@ export default class PersonelCard extends Component {
     return (
       <div className={"personel"}>
         <div class="uk-card uk-card-secondary uk-card-hover uk-card-body">
-          <div className={"img"}>
-            {this.props.img ? (
-              <img src={this.props.img} />
-            ) : (
-              <div className={"alt"} uk-icon="icon: user; ratio: 6.5" />
-            )}
-          </div>
+          {this.props.imageless ? null : (
+            <div className={"img"}>
+              {this.props.img ? (
+                <img src={this.props.img} />
+              ) : (
+                <div className={"alt"} uk-icon="icon: user; ratio: 6.5" />
+              )}
+            </div>
+          )}
           <h3 class="uk-card-title">
             {this.props.name} ({this.props.title})
           </h3>
@@ -46,7 +48,6 @@ export default class PersonelCard extends Component {
             ) : null}
           </div>
         </div>
-        <div className={"personel-outline"} />
       </div>
     );
   }

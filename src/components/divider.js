@@ -1,3 +1,7 @@
 import React, { Component } from "react";
 
-export default () => <hr className={"uk-divider-icon"} />;
+export default () => (
+  <div className={"divider"}>
+    <hr className={"uk-divider-icon"} />
+  </div>
+);

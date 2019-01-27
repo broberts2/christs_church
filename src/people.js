@@ -26,46 +26,7 @@ export default {
     phoneNumber: `4060123456`,
     img: Img1
   },
-  mmiller2: {
-    firstName: "Mark",
-    lastName: "Miller",
-    title: "Pastor",
-    favQuote: `"Go therefore and make disciples of all the nations, baptizing
-      them in the name of the Father and the Son and the Holy Spirit, teaching
-      them to observe all that I commanded you; and lo, I am with you always,
-      even to the end of the age."`,
-    subQuote: `Matthew 28: 19, 20`,
-    email: `mslabulletin@bresnan.net`,
-    phoneNumber: `4060123456`,
-    img: Img0
-  },
   mmiller3: {
-    firstName: "Mark",
-    lastName: "Miller",
-    title: "Pastor",
-    favQuote: `"Go therefore and make disciples of all the nations, baptizing
-      them in the name of the Father and the Son and the Holy Spirit, teaching
-      them to observe all that I commanded you; and lo, I am with you always,
-      even to the end of the age."`,
-    subQuote: `Matthew 28: 19, 20`,
-    email: `mslabulletin@bresnan.net`,
-    phoneNumber: `4060123456`,
-    img: Img0
-  },
-  mmiller4: {
-    firstName: "Mark",
-    lastName: "Miller",
-    title: "Pastor",
-    favQuote: `"Go therefore and make disciples of all the nations, baptizing
-      them in the name of the Father and the Son and the Holy Spirit, teaching
-      them to observe all that I commanded you; and lo, I am with you always,
-      even to the end of the age."`,
-    subQuote: `Matthew 28: 19, 20`,
-    email: `mslabulletin@bresnan.net`,
-    phoneNumber: `4060123456`,
-    img: Img0
-  },
-  mmiller5: {
     firstName: "Nameless",
     lastName: "Man",
     title: "Imposter",
@@ -76,6 +37,8 @@ export default {
     esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
     est laborum."`,
-    subQuote: `Random Latin 5:99`
+    subQuote: `Random Latin 5:99`,
+    email: `mslabulletin@bresnan.net`,
+    phoneNumber: `4060123456`
   }
 };

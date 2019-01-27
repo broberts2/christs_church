@@ -1,14 +1,17 @@
 body {
-  background-color: rgb(224, 224, 224);
+  background-color: rgb(92, 92, 92);
 }
 table {
   table-layout: fixed;
 }
 iframe {
   margin-bottom: 15px;
+  border: 1px solid black;
 }
 .about-us {
-  margin-top: 25px;
+}
+.about-us .about-us-img {
+  padding: 50px;
 }
 .about-us .location-block h4 {
   margin-bottom: -20px;
@@ -24,8 +27,10 @@ iframe {
   margin-top: var(--articleMargin);
   margin-bottom: var(--articleMargin);
 }
-.divider hr {
-  border-color: rgb(54, 54, 54);
+.divider {
+  --veritcalMargin: 10px;
+  margin-top: var(--veritcalMargin);
+  margin-bottom: var(--veritcalMargin);
 }
 .header {
   top: 0%;
@@ -39,11 +44,19 @@ iframe {
 .home {
 }
 .card-table {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .card {
   cursor: pointer;
-  margin: 5px;
+  margin: 15px;
+}
+.card .img-wrapper {
+  text-align: center;
+}
+.card .img-wrapper img {
+  width: 50%;
+  border: 2px solid white;
+  border-radius: 50%;
 }
 .card p {
   height: 50px;
@@ -72,7 +85,7 @@ iframe {
 }
 .personel-card-table {
   text-align: center;
-  margin-top: -50px;
+  margin-top: 0px;
 }
 .personel {
   position: relative;
@@ -80,6 +93,8 @@ iframe {
   text-align: center;
   margin: 0px;
   display: inline-block;
+  border: 0px solid white;
+  border-spacing: 3px;
 }
 .personel .text-block {
   text-align: left;

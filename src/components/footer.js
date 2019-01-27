@@ -10,7 +10,7 @@ class Footer extends Component {
     return (
       <nav
         className={"uk-navbar-container"}
-        style={{ marginBottom: "-25px" }}
+        style={{ marginBottom: "0px" }}
         ukNavbar
       >
         <div className={"uk-padding-small"}>

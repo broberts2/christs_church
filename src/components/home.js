@@ -11,6 +11,7 @@ import config from "../config";
 import people from "../people";
 
 import Img from "../img/msla.png";
+import BgImg1 from "../img/music_icon.png";
 
 class Home extends Component {
   render() {
@@ -42,48 +43,43 @@ class Home extends Component {
         <Fade delay={config.fadeDelay} duration={config.fadeDuration}>
           <div className={"uk-section uk-section-muted"}>
             <div className={"uk-container"}>
-              <h2 style={{ fontStyle: "italic" }}>
+              <h2>
                 “Go therefore and make disciples of all the nations, baptizing
                 them in the name of the Father and the Son and the Holy Spirit,
                 teaching them to observe all that I commanded you; and lo, I am
                 with you always, even to the end of the age.”
               </h2>
-              <h4>Matthew 28: 19, 20</h4>
+              <h4 style={{ fontStyle: "italic" }}>Matthew 28: 19, 20</h4>
             </div>
           </div>
+          <Divider />
         </Fade>
         <CardTable
           perRow={3}
           elements={[
             {
               title: "Audio Resources",
+              imgType: "sound",
               text: "Sunday Sermons and Bible Studies",
               cb: () => (window.location = "/sermons")
             },
             {
               title: "Congregation",
+              imgType: "people",
               text: "Meet the team of Christ's Church Missoula",
               cb: () => (window.location = "/congregation")
             },
             {
               title: "About Us",
+              imgType: "about_us",
               text: "Learn more about Christ's Church Missoula",
               cb: () => (window.location = "/about_us")
             },
             {
               title: "Location",
+              imgType: "gps",
               text: "Find us on Google Maps",
               cb: () => (window.location = "/about_us?loc=true")
-            },
-            {
-              title: "Card Title",
-              text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-              cb: () => console.log("clicked")
-            },
-            {
-              title: "Card Title",
-              text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-              cb: () => console.log("clicked")
             }
           ]}
         />

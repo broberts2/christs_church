@@ -28,7 +28,12 @@ class Congregation extends Component {
         </Fade>
         <Fade delay={config.fadeDelay} duration={config.fadeDuration}>
           <Divider />
-          <PersonelCardTable perRow={3} elements={Object.values(people)} />
+          <PersonelCardTable
+            perRow={3}
+            imageless={false}
+            elements={Object.values(people)}
+          />
+          <Divider />
         </Fade>
         <Footer />
       </div>
