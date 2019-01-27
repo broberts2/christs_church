@@ -23,8 +23,7 @@ class Header extends Component {
               </div>
             </div>
             <div>
-              <img src={Img} ukSvg />
-              <span className={"uk-text-middle"}>{document.title}</span>
+              <h3 className={"uk-text-middle"}>{document.title}</h3>
             </div>
           </div>
         </nav>

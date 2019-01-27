@@ -38,10 +38,17 @@ iframe {
   z-index: 999;
   box-shadow: 5px 2px 7.5px 10px rgba(0, 0, 0, 0.25);
 }
+.header h3 {
+  font-style: italic;
+  font-family: garamond;
+}
 .header img {
   width: 50px;
 }
 .home {
+}
+.home button {
+  border-radius: 5px;
 }
 .card-table {
   margin-top: 10px;
@@ -62,6 +69,13 @@ iframe {
   height: 50px;
 }
 .media-player {
+}
+.media-player img {
+  width: 125px;
+  border: 0px solid rgb(51, 51, 51);
+  border-radius: 50%;
+  float: left;
+  margin-right: 25px;
 }
 .media-player h1 {
   font-size: 25px;

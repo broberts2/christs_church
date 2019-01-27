@@ -32,6 +32,7 @@ class Home extends Component {
                 <h1>Some really cool text goes here</h1>
                 <h2>Some more really cool text goes here</h2>
                 <button
+                  onClick={() => (window.location = "/about_us")}
                   className={"uk-button uk-button-primary uk-button-large"}
                 >
                   Some text
@@ -55,7 +56,7 @@ class Home extends Component {
           <Divider />
         </Fade>
         <CardTable
-          perRow={3}
+          perRow={4}
           elements={[
             {
               title: "Audio Resources",

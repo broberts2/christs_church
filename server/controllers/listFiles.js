@@ -12,7 +12,7 @@ module.exports = {
       const drive = google.drive({ version: "v3", auth });
       drive.files.list(
         {
-          pageSize: 10,
+          pageSize: 100,
           fields:
             "nextPageToken, files(id, name, kind, version, createdTime, parents, mimeType, webContentLink)"
         },
