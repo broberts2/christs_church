@@ -8,6 +8,7 @@ const TOKEN_PATH = "../token.json";
 
 module.exports = {
   listFiles: auth => {
+    console.log("test");
     return new Promise((resolve, reject) => {
       const drive = google.drive({ version: "v3", auth });
       drive.files.list(

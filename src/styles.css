@@ -39,8 +39,8 @@ iframe {
   box-shadow: 5px 2px 7.5px 10px rgba(0, 0, 0, 0.25);
 }
 .header h3 {
-  font-style: italic;
-  font-family: garamond;
+  font-style: normal;
+  /* font-family: garamond; */
 }
 .header img {
   width: 50px;

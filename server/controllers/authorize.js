@@ -7,6 +7,7 @@ const TOKEN_PATH = "../token.json";
 
 module.exports = {
   authorize: (callback, query) => {
+    console.log("test");
     return new Promise((resolve, reject) => {
       const { client_secret, client_id, redirect_uris } = credentials.installed;
       const oAuth2Client = new google.auth.OAuth2(
