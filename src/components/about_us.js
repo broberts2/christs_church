@@ -5,19 +5,11 @@ import Footer from "./footer";
 import Fade from "react-reveal/Fade";
 import Divider from "./divider";
 import config from "../config";
+import MyCalendar from "./my_calendar";
 
 import Img from "../img/cross.png";
 
 class AboutUs extends Component {
-  componentDidMount() {
-    const query = new URLSearchParams(window.location.search).get("loc");
-    query
-      ? setTimeout(
-          () => window.scrollTo({ top: 1225, left: 0, behavior: "smooth" }),
-          0
-        )
-      : window.scrollTo(0, 0);
-  }
   render() {
     return (
       <div>
@@ -127,6 +119,18 @@ class AboutUs extends Component {
                     </p>
                   </div>
                 </article>
+              </div>
+              <Divider />
+              <div class="uk-margin-medium uk-card uk-card-default uk-card-body">
+                <article class="uk-article">
+                  <h1 class="uk-article-title">
+                    <a class="uk-link-reset" href="">
+                      Events
+                    </a>
+                  </h1>
+                  <p>{`Check out some events coming down the pipeline.`}</p>
+                </article>
+                <MyCalendar />
               </div>
             </div>
           </div>

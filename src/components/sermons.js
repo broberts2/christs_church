@@ -2,16 +2,20 @@ import React, { Component } from "react";
 import Header from "./header";
 import Footer from "./footer";
 import MediaPlayer from "./media_player";
+import VideoPlayer from "./video_player";
 import Divider from "./divider";
 import Fade from "react-reveal/Fade";
 import config from "../config";
 import { connect } from "react-redux";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { ScaleLoader } from "react-spinners";
+import CardTable from "./card_table";
+import { Page } from "react-pdf";
+import { Document } from "react-pdf/dist/entry.webpack";
 import { css } from "emotion";
 import "react-tabs/style/react-tabs.css";
-
 import api from "../api";
+import { PDFReader } from "react-read-pdf";
 
 class Row extends Component {
   render() {
@@ -30,8 +34,51 @@ class Row extends Component {
   }
 }
 
+class PDF extends Component {
+  state = {
+    download: false,
+    opacity: 1,
+    pdfImg: null
+  };
+
+  componentDidMount() {
+    const pdf_scale = 0.4;
+    (async () => {
+      const url = await require(this.props.url);
+      this.setState({ pdfImg: <PDFReader url={url} scale={pdf_scale} /> });
+    })();
+  }
+
+  render() {
+    const url = require(this.props.url);
+    return (
+      <a className={"pdf-wrapper"} href={`${this.props.url}`} target={"_blank"}>
+        <div style={{ opacity: this.state.opacity }}>
+          <h1>{this.props.name.replace(".pdf", "")}</h1>
+          <h2>{`Posted: ${this.props.date}`}</h2>
+        </div>
+        <div
+          className={"download"}
+          style={{ opacity: this.state.opacity < 1 ? 1 : 0 }}
+        >
+          <span uk-icon="cloud-download" />
+        </div>
+        <div
+          style={{ opacity: this.state.opacity }}
+          className={"pdf"}
+          onMouseEnter={() => this.setState({ opacity: 0.25 })}
+          onMouseLeave={() => this.setState({ opacity: 1 })}
+        >
+          {this.state.pdfImg}
+        </div>
+      </a>
+    );
+  }
+}
+
 class Sermons extends Component {
   state = {
+    render: "video",
     service: "",
     title: "",
     mediaUrl: "",
@@ -39,13 +86,24 @@ class Sermons extends Component {
     tabIndex: 0,
     columnIndex: 0,
     rows: <div />,
+    writtenRows: <div />,
     mediaObject: null,
-    playingId: ""
+    mediaObjectWritten: null,
+    playingId: "",
+    video: null,
+    searchQuery: ""
   };
 
   async aquireMedia() {
     const mediaObject = await api.fetchContent();
-    this.setState({ mediaObject });
+    const audio = mediaObject.Audio;
+    const video = mediaObject.Video.children[0];
+    const written = mediaObject.Written;
+    this.setState({
+      mediaObject: audio.children,
+      mediaObjectWritten: written.children,
+      video
+    });
   }
 
   selectRow(data) {
@@ -60,26 +118,197 @@ class Sermons extends Component {
     }
   }
 
-  populate(i, newState = {}) {
+  populate(tabIndex, newState = {}) {
     if (this.state.mediaObject) {
       const data = Object.values(this.state.mediaObject).map(el => el.children);
-      const rows = data[i].map((el, i) => (
-        <Row
-          el={el}
-          playingId={this.state.playingId}
-          cb={el => this.selectRow(el)}
-        />
-      ));
-      this.setState(Object.assign({ rows, tabIndex: i }, newState));
+      const rows = data[tabIndex].map((el, i) => {
+        if (this.state.searchQuery.length > 0) {
+          if (el.name.includes(this.state.searchQuery)) {
+            return (
+              <Row
+                el={el}
+                playingId={this.state.playingId}
+                cb={el => this.selectRow(el)}
+              />
+            );
+          }
+        } else {
+          return (
+            <Row
+              el={el}
+              playingId={this.state.playingId}
+              cb={el => this.selectRow(el)}
+            />
+          );
+        }
+      });
+      this.setState(Object.assign({ rows, tabIndex }, newState));
     }
   }
 
-  componentDidMount() {
-    (async () => {
-      await this.aquireMedia();
-      await this.populate(0);
-      this.selectRow(this.state.mediaObject[0].children[0]);
-    })();
+  populate_written() {
+    if (this.state.mediaObjectWritten) {
+      let rows = [];
+      let content = [];
+      this.state.mediaObjectWritten[this.state.tabIndex].children.map(
+        (el, i) => {
+          if (this.state.searchQuery.length > 0) {
+            if (el.name.includes(this.state.searchQuery)) {
+              content.push(
+                <td>
+                  <PDF
+                    url={el.webContentLink}
+                    name={el.name}
+                    date={el.createdDate}
+                  />
+                </td>
+              );
+            }
+          } else {
+            content.push(
+              <td>
+                <PDF
+                  url={el.webContentLink}
+                  name={el.name}
+                  date={el.createdTime}
+                />
+              </td>
+            );
+          }
+          if ((i + 1) % 4 === 0) {
+            rows.push(<tr>{content}</tr>);
+            content = [];
+          }
+        }
+      );
+      if (content.length > 0) {
+        rows.push(<tr>{content}</tr>);
+      }
+      const writtenRows = <tbody>{rows}</tbody>;
+      this.setState({ writtenRows });
+    }
+  }
+
+  // componentDidMount() {
+  //   (async () => {
+  //     await this.aquireMedia();
+  //     await this.populate(0);
+  //     await this.populate_written(0);
+  //     this.selectRow(this.state.mediaObject[0].children[0]);
+  //   })();
+  // }
+
+  renderRouter() {
+    switch (this.state.render) {
+      case "video":
+        return (
+          <div>
+            {this.state.video ? (
+              <VideoPlayer
+                url={this.state.video.webContentLink}
+                description={this.state.video.description}
+                name={this.state.video.name}
+                date={this.state.video.createdTime}
+              />
+            ) : (
+              <div />
+            )}
+          </div>
+        );
+      case "written":
+        return (
+          <div style={{ position: "relative" }}>
+            <h2>Written resources</h2>
+            <div className={"inner-man-button-written"}>
+              <a href={"http://innermanradio.org/"} target={"_blank"}>
+                <button
+                  className={"uk-button uk-button-secondary"}
+                  style={{ height: "125px" }}
+                >
+                  <div style={{ width: "250px" }}>
+                    Subscribe to weekly missoula bulletin
+                  </div>
+                </button>
+              </a>
+            </div>
+            <div className={"search-bar"}>
+              <div className={"uk-margin"}>
+                <input
+                  className={"uk-input"}
+                  type={"text"}
+                  placeholder={"Search"}
+                  onChange={e => {
+                    this.state.searchQuery = e.target.value;
+                    this.populate_written();
+                  }}
+                />
+                <p>Search by title or date.</p>
+              </div>
+            </div>
+            {this.state.mediaObjectWritten ? (
+              <Tabs
+                defaultIndex={0}
+                onSelect={tabIndex => {
+                  this.state.tabIndex = tabIndex;
+                  this.populate_written();
+                }}
+              >
+                <TabList>
+                  {Object.values(this.state.mediaObjectWritten).map(el => (
+                    <Tab>{el.name}</Tab>
+                  ))}
+                </TabList>
+              </Tabs>
+            ) : null}
+            <div style={{ textAlign: "center" }}>
+              <table class="uk-table uk-table-divider">
+                {this.state.writtenRows}
+              </table>
+            </div>
+          </div>
+        );
+      case "audio":
+        return (
+          <div style={{ position: "relative" }}>
+            <h2>Check out past sermons, studies, and devotions!</h2>
+            <MediaPlayer
+              url={this.state.mediaUrl}
+              date={this.state.mediaDate}
+              title={this.state.service}
+              subTitle={this.state.title}
+            />
+            <div className={"inner-man-button"}>
+              <a href={"http://innermanradio.org/"} target={"_blank"}>
+                <button className={"uk-button uk-button-secondary"}>
+                  Inner Man Radio
+                </button>
+              </a>
+            </div>
+            <Divider />
+            {this.state.mediaObject ? (
+              <Tabs defaultIndex={0} onSelect={i => this.populate(i)}>
+                <TabList>
+                  {Object.values(this.state.mediaObject).map(el => (
+                    <Tab>{el.name}</Tab>
+                  ))}
+                </TabList>
+              </Tabs>
+            ) : null}
+            <table class="uk-table uk-table-hover uk-table-divider">
+              <thead>
+                <tr>
+                  <th width={"100px"} />
+                  <th>Title</th>
+                  <th>Date Posted</th>
+                </tr>
+              </thead>
+              <tbody>{this.state.rows}</tbody>
+            </table>
+          </div>
+        );
+      default:
+        return <div />;
+    }
   }
 
   render() {
@@ -90,32 +319,57 @@ class Sermons extends Component {
           <div className={"sermons"}>
             <div class="uk-margin-medium uk-card uk-card-default uk-card-body">
               <article class="uk-article">
-                <MediaPlayer
-                  url={this.state.mediaUrl}
-                  date={this.state.mediaDate}
-                  title={this.state.service}
-                  subTitle={this.state.title}
+                <h1 class="uk-article-title">
+                  <a class="uk-link-reset" href="">
+                    Resources
+                  </a>
+                </h1>
+                <CardTable
+                  perRow={3}
+                  elements={[
+                    {
+                      title: "Sunday Sermon",
+                      imgType: "video",
+                      text: "This sunday's sermon",
+                      cb: () => {
+                        window.scrollTo({
+                          top: 525,
+                          left: 0,
+                          behavior: "smooth"
+                        });
+                        this.setState({ render: "video" });
+                      }
+                    },
+                    {
+                      title: "Written Resources",
+                      imgType: "written",
+                      text: "Written resources",
+                      cb: () => {
+                        window.scrollTo({
+                          top: 525,
+                          left: 0,
+                          behavior: "smooth"
+                        });
+                        this.setState({ render: "written" });
+                      }
+                    },
+                    {
+                      title: "Audio Files",
+                      imgType: "sound",
+                      text: "Audible media",
+                      cb: () => {
+                        window.scrollTo({
+                          top: 525,
+                          left: 0,
+                          behavior: "smooth"
+                        });
+                        this.setState({ render: "audio" });
+                      }
+                    }
+                  ]}
                 />
                 <Divider />
-                {this.state.mediaObject ? (
-                  <Tabs defaultIndex={0} onSelect={i => this.populate(i)}>
-                    <TabList>
-                      {Object.values(this.state.mediaObject).map(el => (
-                        <Tab>{el.name}</Tab>
-                      ))}
-                    </TabList>
-                  </Tabs>
-                ) : null}
-                <table class="uk-table uk-table-hover uk-table-divider">
-                  <thead>
-                    <tr>
-                      <th width={"100px"} />
-                      <th>Title</th>
-                      <th>Date Posted</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.state.rows}</tbody>
-                </table>
+                {this.renderRouter()}
               </article>
             </div>
           </div>

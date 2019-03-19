@@ -3,42 +3,55 @@ const { google } = require("googleapis");
 const Moment = require("moment");
 const credentials = require("../credentials");
 const fs = require("fs");
-const SCOPES = ["https://www.googleapis.com/auth/drive.metadata.readonly"];
-const TOKEN_PATH = "../token.json";
 
 module.exports = {
   listFiles: auth => {
-    console.log("test");
     return new Promise((resolve, reject) => {
       const drive = google.drive({ version: "v3", auth });
       drive.files.list(
         {
           pageSize: 100,
           fields:
-            "nextPageToken, files(id, name, kind, version, createdTime, parents, mimeType, webContentLink)"
+            "nextPageToken, files(id, name, kind, version, createdTime, parents, mimeType, webViewLink, webContentLink, description)"
         },
         (err, res) => {
           if (err) reject("The API returned an error: " + err);
-          let folders = res.data.files.filter(el => {
+          let objectTree = {};
+          let folders = [],
+            data = [];
+          res.data.files.map(el => {
             if (el.mimeType === "application/vnd.google-apps.folder") {
               el["children"] = [];
-              return el;
+              folders.push(el);
+            } else {
+              el.createdTime = new Moment(el.createdTime).format(
+                "MMMM Do, YYYY"
+              );
+              data.push(el);
             }
           });
-          res.data.files.map(el => {
-            if (el.mimeType === "audio/mp3") {
-              folders.map(el2 => {
-                if (el.parents[0] === el2.id) {
-                  el["parentName"] = el2.name;
-                  el.createdTime = Moment(el.createdTime).format(
-                    "MMMM Do, YYYY"
-                  );
-                  el2.children.push(el);
+          data.map(d => {
+            folders.map(f => {
+              if (d.parents[0] === f.id) {
+                f.children.push(d);
+              }
+            });
+          });
+          folders.map(f => {
+            if (f.parents[0] !== "0ADOq3tnHVh9yUk9PVA") {
+              folders.map(f2 => {
+                if (f.parents[0] === f2.id) {
+                  f2.children.push(f);
                 }
               });
             }
           });
-          resolve(folders);
+          folders.map(f => {
+            if (f.parents[0] === "0ADOq3tnHVh9yUk9PVA") {
+              objectTree[f.name] = f;
+            }
+          });
+          resolve(objectTree);
         }
       );
     });

@@ -12,13 +12,16 @@ class NavLinks extends Component {
             <Link to={"/"}>{"Home"}</Link>
           </li>
           <li>
-            <Link to={"/congregation"}>{"Congregation"}</Link>
+            <Link to={"/learn_more"}>{"Learn More"}</Link>
           </li>
           <li>
-            <Link to={"/sermons"}>{"Sermons"}</Link>
+            <Link to={"/resources"}>{"Resources"}</Link>
           </li>
           <li>
-            <Link to={"/about_us"}>{"About Us"}</Link>
+            <Link to={"/events"}>{"Events"}</Link>
+          </li>
+          <li>
+            <Link to={"/contact_us"}>{"Contact Us"}</Link>
           </li>
         </ul>
       </div>

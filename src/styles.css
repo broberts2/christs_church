@@ -1,12 +1,18 @@
 body {
   background-color: rgb(92, 92, 92);
+  outline: 0;
+}
+*:focus {
+  outline: none;
 }
 table {
   table-layout: fixed;
 }
 iframe {
-  margin-bottom: 15px;
-  border: 1px solid black;
+  border: 2px solid rgba(42, 42, 42, 0.5);
+  padding: 2px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 .about-us {
 }
@@ -22,40 +28,56 @@ iframe {
 .about-us .location-block a {
   color: inherit;
 }
+.announcement-modal {
+  padding: 60px;
+}
+.announcement-modal .button {
+  margin: 60px;
+  margin-bottom: 0px;
+  width: 50%;
+}
 .article {
   --articleMargin: 25px;
   margin-top: var(--articleMargin);
   margin-bottom: var(--articleMargin);
 }
-.divider {
-  --veritcalMargin: 10px;
-  margin-top: var(--veritcalMargin);
-  margin-bottom: var(--veritcalMargin);
+.bulletin {
+  margin-top: 25px;
 }
-.header {
-  top: 0%;
-  position: sticky;
-  z-index: 999;
-  box-shadow: 5px 2px 7.5px 10px rgba(0, 0, 0, 0.25);
+.bulletin .event-card {
+  position: relative;
+  margin: 15px;
 }
-.header h3 {
-  font-style: normal;
-  /* font-family: garamond; */
+.bulletin .event-card .content {
+  display: inline-block;
+  width: 55%;
 }
-.header img {
-  width: 50px;
+.bulletin .event-card .image {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin: 50px;
+  margin-top: 0px;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
-.home {
-}
-.home button {
+.bulletin .event-card .image img {
+  background-image: linear-gradient(to bottom, transparent 0%, white 100%);
+  width: 350px;
+  border: 1px solid gray;
+  padding: 0px;
   border-radius: 5px;
+}
+.calendar {
+  margin-top: 25px;
 }
 .card-table {
   margin-top: 10px;
 }
 .card {
   cursor: pointer;
-  margin: 15px;
+  margin: 25px;
 }
 .card .img-wrapper {
   text-align: center;
@@ -67,6 +89,113 @@ iframe {
 }
 .card p {
   height: 50px;
+}
+.contact_us {
+  margin-top: 25px;
+}
+.contact_us .required {
+  color: red;
+  display: inline-flex;
+}
+.contact_us .sub {
+  font-size: 10px;
+  margin-left: 18px;
+}
+.contact_us .form {
+  border: 1px solid rgba(42, 42, 42, 0.5);
+  border-radius: 3px;
+  padding: 15px;
+}
+.contact_us .input input {
+  padding: 5px;
+  width: 75%;
+  min-width: 350px;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(42, 42, 42, 0.5);
+}
+.contact_us .input input:focus {
+  outline: 0;
+}
+.contact_us .input textarea {
+  padding: 5px;
+  width: 75%;
+  min-width: 350px;
+  font-size: 14px;
+  border-radius: 3px;
+  border-color: rgba(42, 42, 42, 0.5);
+}
+.contact_us .input textarea:focus {
+  outline: 0;
+}
+.custom_button {
+  position: relative;
+}
+.custom_button button {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
+  margin-right: 15px;
+}
+.custom_button .checkmark {
+  position: absolute;
+  top: -12.5px;
+  left: -5px;
+  pointer-events: none;
+}
+.custom_button button:focus {
+  outline: 0;
+}
+.divider {
+  --veritcalMargin: 10px;
+  margin-top: var(--veritcalMargin);
+  margin-bottom: var(--veritcalMargin);
+}
+.faq {
+  margin-top: 25px;
+}
+.header {
+  top: 0%;
+  position: sticky;
+  z-index: 990;
+  box-shadow: 5px 2px 7.5px 10px rgba(0, 0, 0, 0.25);
+}
+.header .wrapper {
+  position: relative;
+  height: 50px;
+  display: inline-block;
+  width: 35%;
+}
+.header .wrapper h3 {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-family: "Kaushan Script";
+  font-size: 35px;
+}
+.header img {
+  width: 50px;
+}
+.home {
+}
+.home .announcement-container {
+  position: relative;
+}
+.home .announcement-container .banner {
+  position: absolute;
+  padding: 15px;
+  top: 50%;
+  right: 0;
+  background-color: white;
+  margin: 35px;
+  border-radius: 10px;
+  width: 250px;
+}
+.home button {
+  border-radius: 5px;
 }
 .media-player {
 }
@@ -92,10 +221,77 @@ iframe {
   float: right;
 }
 .media-player audio {
-  width: 50%;
+  width: 25%;
   border: 2px solid rgba(42, 42, 42, 0.5);
   border-radius: 30px;
   padding: 2px;
+}
+.modal {
+  z-index: 999;
+  position: relative;
+}
+.modal .content {
+  border: 1px solid rgba(42, 42, 42, 0.5);
+  border-radius: 3px;
+  padding: 15px;
+  padding-top: 25px;
+  margin-bottom: 25px;
+}
+.modal h1 {
+  position: absolute;
+  background-color: white;
+  top: 20px;
+  left: 100px;
+}
+.modal p {
+  margin: 5px;
+}
+.modal .body {
+  padding: 50px;
+}
+.modal h4 {
+  margin-bottom: 50px;
+}
+.modal .close {
+}
+.my-calendar {
+  margin-top: 25px;
+}
+.my-calendar .calendar {
+  height: 750px;
+}
+.pdf-wrapper {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  text-align: left;
+}
+.pdf-wrapper h1 {
+  font-size: 18px;
+  margin-bottom: 0;
+  margin-left: 15px;
+}
+.pdf-wrapper h2 {
+  font-size: 12px;
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: 15px;
+}
+.pdf-wrapper .pdf {
+  cursor: pointer;
+  display: inline-block;
+  border: 2px solid gray;
+  border-radius: 3px;
+  padding: 3px;
+}
+.pdf-wrapper .download {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 .personel-card-table {
   text-align: center;
@@ -160,4 +356,56 @@ iframe {
 }
 .sermons {
   margin-top: 25px;
+  position: relative;
+}
+.sermons .buffer {
+  margin: 100px;
+}
+.sermons a {
+  text-decoration: none;
+}
+.sermons .search-bar {
+  width: 35%;
+  min-width: 350px;
+}
+.sermons .inner-man-button {
+  position: absolute;
+  top: 25%;
+  right: 0%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.sermons .inner-man-button-written {
+  position: absolute;
+  top: 25%;
+  right: 0%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.title-text {
+  font-size: 30px;
+  font-weight: lighter;
+}
+.video {
+  margin-top: 25px;
+}
+.video-player {
+  text-align: center;
+}
+.video-player .text-block {
+  margin-top: 35px;
+  text-align: left;
+}
+.video-player .video-container {
+  text-align: left;
+  width: 50%;
+}
+.video-player .video-container video {
+  border: 2px solid rgba(42, 42, 42, 0.5);
+  padding: 2px;
+  border-radius: 5px;
 }

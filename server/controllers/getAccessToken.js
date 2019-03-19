@@ -4,7 +4,7 @@ const credentials = require("../credentials");
 const fs = require("fs");
 
 const SCOPES = ["https://www.googleapis.com/auth/drive.metadata.readonly"];
-const TOKEN_PATH = "../token.json";
+const TOKEN_PATH = "./token.json";
 
 module.exports = {
   getAccessToken: async (req, res) => {
