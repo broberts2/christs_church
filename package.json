@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "REACT_APP_BUILDDATE=$(date '+%m-%d-%y, %H:%M') NODE_PATH=./src react-scripts build",
+    "build": "rm -r build; rm -r server.zip; rm -r build.zip; react-scripts build; zip -r build.zip build; zip -r server.zip server -x node_modules",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "production": "PORT=3000 serve -s build"
@@ -38,10 +38,5 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }

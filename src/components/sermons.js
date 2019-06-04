@@ -44,13 +44,16 @@ class PDF extends Component {
   componentDidMount() {
     const pdf_scale = 0.4;
     (async () => {
-      const url = await require(this.props.url);
-      this.setState({ pdfImg: <PDFReader url={url} scale={pdf_scale} /> });
+      const url = this.props.url;
+      this.setState({
+        pdfImg: (
+          <PDFReader url={require("../img/Sample.pdf")} scale={pdf_scale} />
+        )
+      });
     })();
   }
 
   render() {
-    const url = require(this.props.url);
     return (
       <a className={"pdf-wrapper"} href={`${this.props.url}`} target={"_blank"}>
         <div style={{ opacity: this.state.opacity }}>
@@ -120,19 +123,21 @@ class Sermons extends Component {
 
   populate(tabIndex, newState = {}) {
     if (this.state.mediaObject) {
-      const data = Object.values(this.state.mediaObject).map(el => el.children);
-      const rows = data[tabIndex].map((el, i) => {
-        if (this.state.searchQuery.length > 0) {
-          if (el.name.includes(this.state.searchQuery)) {
-            return (
-              <Row
-                el={el}
-                playingId={this.state.playingId}
-                cb={el => this.selectRow(el)}
-              />
-            );
+      let rows = [];
+      let data = Object.values(this.state.mediaObject).map(el => el.children);
+      if (this.state.searchQuery.length > 0) {
+        data = data.filter(el => {
+          if (
+            el[0].name
+              .toLowerCase()
+              .includes(this.state.searchQuery.toLowerCase())
+          ) {
+            return el;
           }
-        } else {
+        });
+      }
+      if (data[tabIndex]) {
+        rows = data[tabIndex].map((el, i) => {
           return (
             <Row
               el={el}
@@ -140,8 +145,8 @@ class Sermons extends Component {
               cb={el => this.selectRow(el)}
             />
           );
-        }
-      });
+        });
+      }
       this.setState(Object.assign({ rows, tabIndex }, newState));
     }
   }
@@ -150,37 +155,28 @@ class Sermons extends Component {
     if (this.state.mediaObjectWritten) {
       let rows = [];
       let content = [];
-      this.state.mediaObjectWritten[this.state.tabIndex].children.map(
-        (el, i) => {
-          if (this.state.searchQuery.length > 0) {
-            if (el.name.includes(this.state.searchQuery)) {
-              content.push(
-                <td>
-                  <PDF
-                    url={el.webContentLink}
-                    name={el.name}
-                    date={el.createdDate}
-                  />
-                </td>
-              );
-            }
-          } else {
-            content.push(
-              <td>
-                <PDF
-                  url={el.webContentLink}
-                  name={el.name}
-                  date={el.createdTime}
-                />
-              </td>
-            );
+      let newArray = this.state.mediaObjectWritten[this.state.tabIndex]
+        .children;
+      if (this.state.searchQuery.length > 0) {
+        newArray = newArray.filter(el => {
+          if (
+            el.name.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+          ) {
+            return el;
           }
-          if ((i + 1) % 4 === 0) {
-            rows.push(<tr>{content}</tr>);
-            content = [];
-          }
+        });
+      }
+      newArray.map((el, i) => {
+        content.push(
+          <td>
+            <PDF url={el.webContentLink} name={el.name} date={el.createdTime} />
+          </td>
+        );
+        if ((i + 1) % 4 === 0) {
+          rows.push(<tr>{content}</tr>);
+          content = [];
         }
-      );
+      });
       if (content.length > 0) {
         rows.push(<tr>{content}</tr>);
       }
@@ -189,14 +185,14 @@ class Sermons extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   (async () => {
-  //     await this.aquireMedia();
-  //     await this.populate(0);
-  //     await this.populate_written(0);
-  //     this.selectRow(this.state.mediaObject[0].children[0]);
-  //   })();
-  // }
+  componentDidMount() {
+    (async () => {
+      await this.aquireMedia();
+      await this.populate(0);
+      await this.populate_written(0);
+      this.selectRow(this.state.mediaObject[0].children[0]);
+    })();
+  }
 
   renderRouter() {
     switch (this.state.render) {
@@ -242,7 +238,7 @@ class Sermons extends Component {
                     this.populate_written();
                   }}
                 />
-                <p>Search by title or date.</p>
+                <p>Search by title.</p>
               </div>
             </div>
             {this.state.mediaObjectWritten ? (
@@ -285,6 +281,20 @@ class Sermons extends Component {
               </a>
             </div>
             <Divider />
+            <div className={"search-bar"}>
+              <div className={"uk-margin"}>
+                <input
+                  className={"uk-input"}
+                  type={"text"}
+                  placeholder={"Search"}
+                  onChange={e => {
+                    this.state.searchQuery = e.target.value;
+                    this.populate(this.state.tabIndex);
+                  }}
+                />
+                <p>Search by title.</p>
+              </div>
+            </div>
             {this.state.mediaObject ? (
               <Tabs defaultIndex={0} onSelect={i => this.populate(i)}>
                 <TabList>

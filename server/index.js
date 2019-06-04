@@ -27,27 +27,27 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/files", async (req, res) => {
+app.get("/api/files", async (req, res) => {
   const resolved = await authorize(listFiles);
   res.json(resolved);
 });
 
-app.post("/get_events", async (req, res) => {
+app.post("/api/get_events", async (req, res) => {
   const resolved = await authorize(getEvents, req.body);
   res.json(resolved);
 });
 
-app.post("/get_bulletin", async (req, res) => {
+app.post("/api/get_bulletin", async (req, res) => {
   const resolved = await authorize(getBulletin, req.body);
   res.json(resolved);
 });
 
-app.post("/get_announcement", async (req, res) => {
+app.post("/api/get_announcement", async (req, res) => {
   const resolved = await authorize(getAnnouncement, req.body);
   res.json(resolved);
 });
 
-app.post("/contact_us", async (req, res) => {
+app.post("/api/contact_us", async (req, res) => {
   const resolved = await contactUs(req.body);
   res.json(resolved);
 });

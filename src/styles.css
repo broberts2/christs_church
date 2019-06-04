@@ -379,7 +379,7 @@ iframe {
 }
 .sermons .inner-man-button-written {
   position: absolute;
-  top: 25%;
+  top: 85px;
   right: 0%;
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);

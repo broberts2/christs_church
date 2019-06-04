@@ -3,7 +3,7 @@ import config from "./config";
 const api = {
   getAnnouncement: async array => {
     const content = await fetch(
-      `${config.protocol}${config.api}${config.port}/get_announcement`,
+      `${config.protocol}${config.api}${config.port}/api/get_announcement`,
       {
         method: "POST",
         headers: {
@@ -17,7 +17,7 @@ const api = {
   },
   fetchContent: async () => {
     const content = await fetch(
-      `${config.protocol}${config.api}${config.port}/files`,
+      `${config.protocol}${config.api}${config.port}/api/files`,
       {
         method: "GET",
         headers: {
@@ -30,7 +30,7 @@ const api = {
   },
   getEvents: async array => {
     const content = await fetch(
-      `${config.protocol}${config.api}${config.port}/get_events`,
+      `${config.protocol}${config.api}${config.port}/api/get_events`,
       {
         method: "POST",
         headers: {
@@ -44,7 +44,7 @@ const api = {
   },
   getBulletin: async array => {
     const content = await fetch(
-      `${config.protocol}${config.api}${config.port}/get_bulletin`,
+      `${config.protocol}${config.api}${config.port}/api/get_bulletin`,
       {
         method: "POST",
         headers: {
@@ -58,7 +58,7 @@ const api = {
   },
   contactUs: async data => {
     const content = await fetch(
-      `${config.protocol}${config.api}${config.port}/contact_us`,
+      `${config.protocol}${config.api}${config.port}/api/contact_us`,
       {
         method: "POST",
         headers: {
