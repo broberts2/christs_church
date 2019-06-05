@@ -30,7 +30,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -r build; rm -r server.zip; rm -r build.zip; react-scripts build; zip -r build.zip build; zip -r server.zip server -x node_modules",
+    "build": "react-scripts build",
+    "heroku-postbuild": "rm -r build; rm -r server.zip; rm -r build.zip; react-scripts build; zip -r build.zip build; zip -r server.zip server -x node_modules",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "production": "PORT=3000 serve -s build"
