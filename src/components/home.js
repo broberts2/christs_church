@@ -7,7 +7,7 @@ import PersonelCardTable from "./personel_card_table";
 import Article from "./article";
 import Divider from "./divider";
 import CardTable from "./card_table";
-import config from "./config";
+import config from "../config";
 
 import Img from "../img/msla.png";
 import BgImg1 from "../img/music_icon.png";
