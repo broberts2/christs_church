@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "REACT_APP_BUILDDATE=$(date '+%m-%d-%y, %H:%M') NODE_PATH=./src react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "production": "PORT=3000 serve -s build"
