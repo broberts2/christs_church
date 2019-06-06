@@ -1,6 +1,9 @@
 {
   "name": "christs_church",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.16.0"
+  },
   "private": true,
   "dependencies": {
     "emotion": "^10.0.6",
