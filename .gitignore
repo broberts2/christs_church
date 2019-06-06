@@ -4,7 +4,6 @@ id_rsa.pub
 server/config.js
 server/credentials.js
 server/token.json
-src/config.js
 src/token.json
 src/credentials.json
 notes.txt
