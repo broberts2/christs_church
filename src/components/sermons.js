@@ -216,7 +216,7 @@ class Sermons extends Component {
           <div style={{ position: "relative" }}>
             <h2>Written resources</h2>
             <div className={"inner-man-button-written"}>
-              <a href={"http://innermanradio.org/"} target={"_blank"}>
+              <a href={"/contact_us"}>
                 <button
                   className={"uk-button uk-button-secondary"}
                   style={{ height: "125px" }}
@@ -338,9 +338,8 @@ class Sermons extends Component {
                   perRow={3}
                   elements={[
                     {
-                      title: "Sunday Sermon",
+                      title: "Sunday Message",
                       imgType: "video",
-                      text: "This sunday's sermon",
                       cb: () => {
                         window.scrollTo({
                           top: 525,
@@ -353,7 +352,6 @@ class Sermons extends Component {
                     {
                       title: "Written Resources",
                       imgType: "written",
-                      text: "Written resources",
                       cb: () => {
                         window.scrollTo({
                           top: 525,
@@ -366,7 +364,6 @@ class Sermons extends Component {
                     {
                       title: "Audio Files",
                       imgType: "sound",
-                      text: "Audible media",
                       cb: () => {
                         window.scrollTo({
                           top: 525,

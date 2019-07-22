@@ -7,23 +7,7 @@ class NavLinks extends Component {
   render() {
     return (
       <div>
-        <ul className={"uk-navbar-nav"}>
-          <li>
-            <Link to={"/"}>{"Home"}</Link>
-          </li>
-          <li>
-            <Link to={"/learn_more"}>{"Learn More"}</Link>
-          </li>
-          <li>
-            <Link to={"/resources"}>{"Resources"}</Link>
-          </li>
-          <li>
-            <Link to={"/events"}>{"Events"}</Link>
-          </li>
-          <li>
-            <Link to={"/contact_us"}>{"Contact Us"}</Link>
-          </li>
-        </ul>
+        <ul className={"uk-navbar-nav"} />
       </div>
     );
   }

@@ -38,23 +38,25 @@ class FAQ extends Component {
       case "our_approach":
         return (
           <div>
+            <i class="far fa-compass" />
             <h1>Our Approach</h1>
             <div className={"title-text"}>
-              Faith follows fact. Biblical faith is the reuslt of an examination
-              of the pertinant facts. It is the "conviction of things not seen"
+              Faith follows fact. Biblical faith is the result of an examination
+              of the pertinent facts. It is the "conviction of things not seen"
               (Hebrews 11:1) based on the evidence already presented. For this
               reason we seek to strengthen our faith through greater
-              understandin and the practice of those principles in our own
-              lives. Truth must be known before it can be belived.
+              understanding and the practice of those principles in our own
+              lives. Truth must be known before it can be believed.
             </div>
           </div>
         );
       case "our_beliefs":
         return (
           <div>
+            <i class="fab fa-readme" />
             <h1>Our Beliefs</h1>
             <div className={"title-text"}>
-              We have no human creeds. We belive the Scriptures were originally
+              We have no human creeds. We believe the Scriptures were originally
               inerrant and continue so in as much as they have been accurately
               translated. The Bible teaches that a genuine Faith that Jesus is
               Lord/God is a prerequisite for relationship with God and produces:
@@ -66,12 +68,12 @@ class FAQ extends Component {
                 <li>Repentance from sin and (Luke 24:47)</li>
                 <li>
                   An appeal to receive forgiveness of sins and the Holy Spirit
-                  dweling within through immersion baptism (Acts 2:38, I Peter
+                  dwelling within through immersion baptism (Acts 2:38, I Peter
                   3:21)
                 </li>
                 <li>
                   An empowered new creature with the potential to live
-                  righteously (II 5:17)
+                  righteously (Corithians II 5:17)
                 </li>
               </ul>
             </div>
@@ -80,6 +82,7 @@ class FAQ extends Component {
       case "our_congregation":
         return (
           <div>
+            <i class="fas fa-hands" />
             <h1>Our Congregation</h1>
             <div className={"title-text"}>
               We're not a denomiation. We share bonds of fellowship with many
@@ -94,12 +97,6 @@ class FAQ extends Component {
         return (
           <div>
             <h1>Facts and Questions</h1>
-            <div className={"title-text"}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </div>
             {qa.map(el => (
               <div>
                 <Divider />

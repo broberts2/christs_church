@@ -40,12 +40,6 @@ class Home extends Component {
                     To present the objective truth of Jesus fairly, honestly,
                     compassionately and without compromise
                   </h2>
-                  <button
-                    onClick={() => (window.location = "/about_us")}
-                    className={"uk-button uk-button-primary uk-button-large"}
-                  >
-                    About Us
-                  </button>
                 </div>
               </div>
             </div>
@@ -69,7 +63,7 @@ class Home extends Component {
             {
               title: "Resources",
               imgType: "video",
-              text: "Check Out Our Last Sermon and Audio Files",
+              text: "Check Out Our Lastest Sermon and Audio Files",
               cb: () => (window.location = "/resources")
             },
             {
